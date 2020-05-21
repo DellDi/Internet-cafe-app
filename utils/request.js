@@ -1,9 +1,10 @@
-import axios from "axios";
+import axios from "@/js_sdk/gangdiedao-uni-axios";
+const APP_BASE_URL = process.env.NODE_ENV === 'development' ? 'http://118.31.167.239:8080' : 'http://118.31.167.239:8080'
 
 
 // 创建请求实例
 const service = axios.create({
-  baseURL: process.env.APP_TEST_URL // url = base url + request url
+  baseURL: APP_BASE_URL // url = base url + request url
   // withCredentials: true, // send cookies when cross-domain requests
 });
 
@@ -37,20 +38,7 @@ service.interceptors.response.use(
       return response.data;
     } else {
       const res = response.data;
-      if (res.code === 10008 || res.code === 10004) {
-       
-      } else if (res.code === 10017) {
-        
-      } else if (res.code === 10011) {
-       
-      } else if (res.code === 10012) {
-     
-      } else if (res.code === 50012 || res.code === 50014) {
-        
-      } else {
       
-        // return Promise.reject(new Error(res.msg || "服务器异常"));
-      }
       return res;
     }
   },
